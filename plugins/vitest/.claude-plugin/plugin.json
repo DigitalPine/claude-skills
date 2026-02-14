@@ -1,0 +1,12 @@
+{
+  "name": "vitest",
+  "version": "1.0.0",
+  "description": "Setup, configure, audit, and modernize Vitest testing in projects.",
+  "author": {
+    "name": "Digital Pine",
+    "url": "https://github.com/DigitalPine"
+  },
+  "repository": "https://github.com/DigitalPine/claude-skills",
+  "license": "MIT",
+  "keywords": ["vitest", "testing", "jest", "coverage", "browser-testing"]
+}

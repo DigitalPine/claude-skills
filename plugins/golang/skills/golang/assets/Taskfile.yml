@@ -1,0 +1,169 @@
+# Go Project Taskfile
+# Requires: Go 1.24+, task (https://taskfile.dev)
+# Install task: brew install go-task
+
+version: '3'
+
+vars:
+  BINARY_NAME:
+    sh: basename $(pwd)
+  BUILD_DIR: ./bin
+  MAIN_PKG: ./cmd/{{.BINARY_NAME}}
+  LDFLAGS: -s -w
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  # === Build ===
+
+  build:
+    desc: Build the binary
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+      - go build -ldflags "{{.LDFLAGS}}" -o {{.BUILD_DIR}}/{{.BINARY_NAME}} {{.ENTRY_POINT}}
+    vars:
+      ENTRY_POINT:
+        sh: |
+          if [ -d "{{.MAIN_PKG}}" ]; then
+            echo "{{.MAIN_PKG}}"
+          else
+            echo "."
+          fi
+
+  build:all:
+    desc: Build for multiple platforms
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+      - GOOS=linux GOARCH=amd64 go build -ldflags "{{.LDFLAGS}}" -o {{.BUILD_DIR}}/{{.BINARY_NAME}}-linux-amd64 {{.ENTRY_POINT}}
+      - GOOS=linux GOARCH=arm64 go build -ldflags "{{.LDFLAGS}}" -o {{.BUILD_DIR}}/{{.BINARY_NAME}}-linux-arm64 {{.ENTRY_POINT}}
+      - GOOS=darwin GOARCH=amd64 go build -ldflags "{{.LDFLAGS}}" -o {{.BUILD_DIR}}/{{.BINARY_NAME}}-darwin-amd64 {{.ENTRY_POINT}}
+      - GOOS=darwin GOARCH=arm64 go build -ldflags "{{.LDFLAGS}}" -o {{.BUILD_DIR}}/{{.BINARY_NAME}}-darwin-arm64 {{.ENTRY_POINT}}
+    vars:
+      ENTRY_POINT:
+        sh: |
+          if [ -d "{{.MAIN_PKG}}" ]; then
+            echo "{{.MAIN_PKG}}"
+          else
+            echo "."
+          fi
+
+  run:
+    desc: Run the application
+    cmds:
+      - go run {{.ENTRY_POINT}}
+    vars:
+      ENTRY_POINT:
+        sh: |
+          if [ -d "{{.MAIN_PKG}}" ]; then
+            echo "{{.MAIN_PKG}}"
+          else
+            echo "."
+          fi
+
+  # === Test ===
+
+  test:
+    desc: Run tests
+    cmds:
+      - go test -v ./...
+
+  test:race:
+    desc: Run tests with race detector
+    cmds:
+      - go test -race -v ./...
+
+  test:cover:
+    desc: Run tests with coverage report
+    cmds:
+      - go test -coverprofile=coverage.out ./...
+      - go tool cover -html=coverage.out -o coverage.html
+      - echo "Coverage report: coverage.html"
+
+  test:short:
+    desc: Run short tests only (skip slow/integration)
+    cmds:
+      - go test -short -v ./...
+
+  bench:
+    desc: Run benchmarks
+    cmds:
+      - go test -bench=. -benchmem ./...
+
+  # === Lint ===
+
+  lint:
+    desc: Run golangci-lint
+    cmds:
+      - go tool golangci-lint run
+    preconditions:
+      - sh: go tool golangci-lint version
+        msg: "golangci-lint not found. Run: task install:tools"
+
+  lint:fix:
+    desc: Run golangci-lint with auto-fix
+    cmds:
+      - go tool golangci-lint run --fix
+
+  fmt:
+    desc: Format code
+    cmds:
+      - go tool golangci-lint fmt
+      - go fmt ./...
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet ./...
+
+  # === Dependencies ===
+
+  install:tools:
+    desc: Install tool dependencies (Go 1.24+)
+    cmds:
+      - go get -tool github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+  update:tools:
+    desc: Update all tool dependencies
+    cmds:
+      - go get tool
+
+  tidy:
+    desc: Tidy go.mod and go.sum
+    cmds:
+      - go mod tidy
+
+  deps:
+    desc: Download dependencies
+    cmds:
+      - go mod download
+
+  # === Clean ===
+
+  clean:
+    desc: Remove build artifacts
+    cmds:
+      - rm -rf {{.BUILD_DIR}}
+      - rm -f coverage.out coverage.html
+
+  clean:cache:
+    desc: Clear Go build cache
+    cmds:
+      - go clean -cache
+
+  # === CI ===
+
+  ci:
+    desc: Run full CI pipeline
+    cmds:
+      - task: lint
+      - task: test:race
+      - task: build
+
+  check:
+    desc: Quick check (lint + test)
+    cmds:
+      - task: lint
+      - task: test

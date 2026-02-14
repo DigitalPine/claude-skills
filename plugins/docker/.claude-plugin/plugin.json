@@ -1,0 +1,12 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "description": "Docker guidance for fast-moving teams. Multi-stage builds, security hardening, and BuildKit optimization.",
+  "author": {
+    "name": "Digital Pine",
+    "url": "https://github.com/DigitalPine"
+  },
+  "repository": "https://github.com/DigitalPine/claude-skills",
+  "license": "MIT",
+  "keywords": ["docker", "containers", "dockerfile", "buildkit", "security"]
+}

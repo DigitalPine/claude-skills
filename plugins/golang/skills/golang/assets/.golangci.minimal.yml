@@ -1,0 +1,49 @@
+# Minimal golangci-lint config for fast-moving projects
+# Just the essentials - catches real problems without friction
+# Grow to .golangci.yml when codebase matures
+
+version: "2"
+
+formatters:
+  enable:
+    - goimports
+
+  settings:
+    goimports:
+      local-prefixes:
+        # CUSTOMIZE: Set to your module path
+        - github.com/yourorg/yourproject
+
+linters:
+  default: none
+
+  enable:
+    # These 5 catch real problems without noise
+    - errcheck      # Don't ignore errors
+    - govet         # Compiler-adjacent checks
+    - staticcheck   # Catches real bugs
+    - gosec         # Security basics
+    - unused        # Dead code
+    # Note: goimports is in formatters section (not linters) in v2
+
+  settings:
+    errcheck:
+      check-type-assertions: true
+
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment  # Pedantic
+        - shadow          # Annoying during iteration
+
+  exclusions:
+    presets:
+      - std-error-handling
+      - common-false-positives
+
+    rules:
+      # Test files get a pass
+      - path: '_test\.go'
+        linters:
+          - errcheck
+          - gosec

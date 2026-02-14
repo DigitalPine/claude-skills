@@ -1,0 +1,167 @@
+# golangci-lint v2 configuration
+# Based on https://github.com/maratori/golangci-lint-config
+# Adapted for startup pace: strict but not draconian
+
+version: "2"
+
+issues:
+  max-same-issues: 50
+
+formatters:
+  enable:
+    - goimports
+    - golines
+
+  settings:
+    goimports:
+      local-prefixes:
+        # CUSTOMIZE: Set to your module path
+        - github.com/yourorg/yourproject
+
+    golines:
+      max-len: 120
+
+linters:
+  # Start with standard, enable extras explicitly
+  default: none
+
+  enable:
+    # == Essential (always enable) ==
+    - errcheck          # Check errors are handled
+    - errorlint         # Proper error wrapping/checking
+    - govet             # Go team's vet checks
+    - staticcheck       # Advanced static analysis
+    - unused            # Find unused code
+
+    # == Security ==
+    - gosec             # Security issues
+
+    # == Bugs & Correctness ==
+    - bodyclose         # HTTP body close
+    - durationcheck     # Duration multiplication
+    - nilerr            # nil error returns
+    - noctx             # HTTP without context
+    - rowserrcheck      # SQL rows.Err()
+    - sqlclosecheck     # SQL close checks
+
+    # == Style & Consistency ==
+    - goimports         # Import formatting
+    - revive            # Opinionated linter
+    - gocritic          # Code patterns
+    - godot             # Comment periods
+    - misspell          # Spelling
+
+    # == Complexity (tune thresholds below) ==
+    - cyclop            # Cyclomatic complexity
+    - funlen            # Function length
+    - gocognit          # Cognitive complexity
+
+    # == Performance ==
+    - perfsprint        # Printf performance
+    - prealloc          # Slice preallocation hints
+
+    # == Modern Go ==
+    - copyloopvar       # Loop variable capture (Go 1.22+)
+    - intrange          # Integer range loops
+    - sloglint          # slog best practices
+
+    # == Testing ==
+    - tparallel         # Parallel test helpers
+    - testifylint       # Testify best practices
+
+  settings:
+    cyclop:
+      max-complexity: 30        # Reasonable for startups
+      package-average: 10.0
+
+    errcheck:
+      check-type-assertions: true
+
+    funlen:
+      lines: 100                # 100 lines max
+      statements: 50            # 50 statements max
+
+    gocognit:
+      min-complexity: 20        # Flag very complex functions
+
+    gocritic:
+      settings:
+        captLocal:
+          paramsOnly: false
+        underef:
+          skipRecvDeref: false
+
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment        # Too pedantic for fast iteration
+      settings:
+        shadow:
+          strict: true
+
+    revive:
+      rules:
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: dot-imports
+        - name: error-return
+        - name: error-strings
+        - name: error-naming
+        - name: exported
+        - name: increment-decrement
+        - name: indent-error-flow
+        - name: package-comments
+          disabled: true        # Not critical early on
+        - name: range
+        - name: receiver-naming
+        - name: time-naming
+        - name: unexported-return
+        - name: var-declaration
+        - name: var-naming
+
+    sloglint:
+      no-global: all            # Encourage injected loggers
+      context: scope            # Encourage context-aware logging
+
+    staticcheck:
+      checks:
+        - all
+        - -ST1000              # Package comments not required
+        - -ST1003              # Underscores in names OK sometimes
+        - -QF1008              # Don't force embedded field access
+
+  exclusions:
+    warn-unused: true
+    presets:
+      - std-error-handling      # Don't flag errors.Is patterns
+      - common-false-positives  # Known false positives
+
+    rules:
+      # Allow TODOs without periods
+      - source: 'TODO'
+        linters: [godot]
+
+      # Test files get relaxed rules
+      - path: '_test\.go'
+        linters:
+          - bodyclose
+          - dupl
+          - errcheck
+          - funlen
+          - goconst
+          - gosec
+          - noctx
+
+      # Generated code excluded
+      - path: '\.pb\.go$'
+        linters: [all]
+      - path: '_gen\.go$'
+        linters: [all]
+      - path: 'mock_.*\.go$'
+        linters: [all]
+
+      # Main files can use log package
+      - path: 'main\.go$'
+        text: 'Use log/slog instead'
+        linters: [depguard]

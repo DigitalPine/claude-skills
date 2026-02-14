@@ -1,0 +1,70 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "// Test Commands": "──────────────────────────────────────────────",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:ui": "vitest --ui --coverage",
+
+    "// Browser Testing": "──────────────────────────────────────────────",
+    "test:browser": "vitest --browser.enabled",
+    "test:browser:run": "vitest run --browser.enabled --browser.headless",
+    "test:browser:debug": "vitest --browser.enabled --browser.headless=false",
+
+    "// Project-Specific Tests": "──────────────────────────────────────────",
+    "test:unit": "vitest --project unit",
+    "test:integration": "vitest --project integration",
+
+    "// Type Checking": "──────────────────────────────────────────────",
+    "test:types": "vitest --typecheck.enabled",
+
+    "// CI/CD Scripts": "──────────────────────────────────────────────",
+    "test:ci": "vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=junit.xml",
+    "test:ci:shard": "vitest run --shard=$SHARD_INDEX/$SHARD_COUNT"
+  },
+  "devDependencies": {
+    "// Core Dependencies": "────────────────────────────────────────────",
+    "vitest": "^4.0.0",
+
+    "// Coverage Providers (choose one)": "──────────────────────────────",
+    "@vitest/coverage-v8": "^4.0.0",
+    "// OR": "",
+    "@vitest/coverage-istanbul": "^4.0.0",
+
+    "// Browser Testing (if needed)": "──────────────────────────────────",
+    "@vitest/browser-playwright": "^4.0.0",
+    "// OR": "",
+    "@vitest/browser-webdriverio": "^4.0.0",
+    "// OR": "",
+    "@vitest/browser-preview": "^4.0.0",
+
+    "// UI Interface (optional)": "──────────────────────────────────────",
+    "@vitest/ui": "^4.0.0",
+
+    "// Test Environment (if not using default node)": "─────────────────",
+    "jsdom": "^25.0.0",
+    "// OR": "",
+    "happy-dom": "^15.0.0",
+
+    "// Framework-Specific Rendering (if doing component tests)": "──────",
+    "vitest-browser-react": "^0.0.1",
+    "// OR": "",
+    "vitest-browser-vue": "^0.0.1",
+    "// OR": "",
+    "vitest-browser-svelte": "^0.0.1",
+
+    "// Testing Library (optional, for better queries)": "───────────────",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@testing-library/jest-dom": "^6.0.0",
+
+    "// TypeScript": "───────────────────────────────────────────────────",
+    "typescript": "^5.0.0",
+    "@types/node": "^22.0.0"
+  }
+}

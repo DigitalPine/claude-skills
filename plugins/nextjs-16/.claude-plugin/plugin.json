@@ -1,0 +1,12 @@
+{
+  "name": "nextjs-16",
+  "version": "1.0.0",
+  "description": "Setup, configure, audit, and modernize Next.js 16 projects with contemporary tooling.",
+  "author": {
+    "name": "Digital Pine",
+    "url": "https://github.com/DigitalPine"
+  },
+  "repository": "https://github.com/DigitalPine/claude-skills",
+  "license": "MIT",
+  "keywords": ["nextjs", "react", "server-components", "turbopack", "vercel"]
+}

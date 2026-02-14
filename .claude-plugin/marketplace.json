@@ -1,0 +1,69 @@
+{
+  "name": "digitalpine",
+  "description": "Curated Claude Code plugins by Digital Pine. Framework setup, auditing, and modernization skills built from real-world production experience.",
+  "owner": {
+    "name": "Digital Pine",
+    "email": "art.longbottom.jr@gmail.com"
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "biome",
+      "source": "./biome",
+      "description": "Setup, configure, audit, and optimize Biome linter/formatter. Covers installation, migration from ESLint+Prettier, unsafe fix workflows, Next.js integration, and team configuration.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["biome", "linter", "formatter", "eslint", "prettier", "javascript", "typescript"],
+      "category": "development"
+    },
+    {
+      "name": "vitest",
+      "source": "./vitest",
+      "description": "Setup, configure, audit, and modernize Vitest testing. Covers v4.0+ best practices, Jest migration, browser mode, visual regression testing, coverage, and CI integration.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["vitest", "testing", "jest", "coverage", "browser-testing", "typescript"],
+      "category": "development"
+    },
+    {
+      "name": "nextjs-16",
+      "source": "./nextjs-16",
+      "description": "Setup, configure, audit, and modernize Next.js 16 projects. Covers Cache Components, proxy.ts migration, async APIs, Turbopack, Biome integration, shadcn/ui, and Vercel flags.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["nextjs", "react", "server-components", "turbopack", "vercel", "typescript"],
+      "category": "development"
+    },
+    {
+      "name": "docker",
+      "source": "./docker",
+      "description": "Docker guidance for fast-moving teams. Starts with 'do you need a Dockerfile?' decision tree. Covers multi-stage builds, security hardening, BuildKit optimization, and language-specific patterns.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["docker", "containers", "dockerfile", "buildkit", "multi-stage", "security"],
+      "category": "development"
+    },
+    {
+      "name": "golang",
+      "source": "./golang",
+      "description": "Setup, audit, and modernize Go projects with 2025 best practices. Two tiers: quick start (minimal friction) or full setup (production-ready). Covers project structure, linting, testing, and CI.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["go", "golang", "setup", "linting", "testing", "project-structure"],
+      "category": "development"
+    }
+  ]
+}

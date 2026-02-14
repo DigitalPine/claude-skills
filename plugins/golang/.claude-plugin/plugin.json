@@ -1,0 +1,12 @@
+{
+  "name": "golang",
+  "version": "1.0.0",
+  "description": "Setup, audit, and modernize Go projects with 2025 best practices.",
+  "author": {
+    "name": "Digital Pine",
+    "url": "https://github.com/DigitalPine"
+  },
+  "repository": "https://github.com/DigitalPine/claude-skills",
+  "license": "MIT",
+  "keywords": ["go", "golang", "setup", "linting", "testing"]
+}

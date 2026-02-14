@@ -1,0 +1,17 @@
+# Minimal Go Makefile - just the essentials
+# Expand when you need more
+
+.PHONY: run test lint dev
+
+run:
+	go run .
+
+test:
+	go test ./...
+
+lint:
+	go tool golangci-lint run
+
+# Hot reload (requires: go install github.com/air-verse/air@latest)
+dev:
+	air
