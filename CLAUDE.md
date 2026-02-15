@@ -41,12 +41,12 @@ Skills are **manually synced** from `~/Code/agent-skills/skills/`. This repo is 
 - **Marketplace name**: `digitalpine`
 - **User install**: `/plugin marketplace add DigitalPine/claude-skills`
 
-## Future: Premium Skills
+## Premium Skills
 
-Architecture designed but not built:
-- `DigitalPine/claude-skills-pro` (private repo)
-- Polar.sh for one-time purchase
-- Webhook adds buyer as GitHub collaborator
-- No DRM, no license keys — Git access control is the gate
+Live at `DigitalPine/claude-skills-pro` (private repo):
+- 4 skill packs ($29 each) + lifetime all-access ($99)
+- Polar.sh for payment + built-in GitHub Repository Access benefit
+- No DRM, no license keys — Git collaborator access is the gate
+- Local: `~/Code/digitalpine-skills-pro`
 
 @import PHILOSOPHY.md
