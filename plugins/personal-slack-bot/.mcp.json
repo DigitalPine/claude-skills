@@ -1,0 +1,9 @@
+{
+  "slack-bot": {
+    "command": "npx",
+    "args": ["@digitalpine/slack-api-mcp@latest"],
+    "env": {
+      "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "display_information": {
+    "name": "{{BOT_NAME}}",
+    "description": "Personal Claude Code bot for Slack",
+    "background_color": "#1a1a2e"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "{{BOT_NAME}}",
+      "always_online": true
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "channels:history",
+        "channels:join",
+        "channels:manage",
+        "channels:read",
+        "chat:write",
+        "files:read",
+        "files:write",
+        "groups:history",
+        "groups:read",
+        "im:history",
+        "im:read",
+        "pins:write",
+        "reactions:write",
+        "users:read",
+        "users:read.email",
+        "mpim:history"
+      ]
+    }
+  },
+  "settings": {
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
+}

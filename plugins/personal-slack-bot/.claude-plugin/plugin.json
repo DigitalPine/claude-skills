@@ -1,0 +1,12 @@
+{
+  "name": "personal-slack-bot",
+  "version": "1.0.0",
+  "description": "Give Claude Code a Slack identity. 15 tools for messaging, reactions, channels, users, and file uploads with Block Kit formatting.",
+  "author": {
+    "name": "Digital Pine",
+    "url": "https://github.com/DigitalPine"
+  },
+  "repository": "https://github.com/DigitalPine/claude-skills",
+  "license": "MIT",
+  "keywords": ["slack", "bot", "messaging", "mcp", "block-kit"]
+}

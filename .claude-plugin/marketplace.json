@@ -64,6 +64,17 @@
       "license": "MIT",
       "keywords": ["go", "golang", "setup", "linting", "testing", "project-structure"],
       "category": "development"
+    },
+    {
+      "name": "personal-slack-bot",
+      "source": "./personal-slack-bot",
+      "description": "Give Claude Code a Slack identity. 15 tools for messaging, reactions, channels, users, and file uploads with Block Kit formatting.",
+      "version": "1.0.0",
+      "author": { "name": "Digital Pine" },
+      "repository": "https://github.com/DigitalPine/claude-skills",
+      "license": "MIT",
+      "keywords": ["slack", "bot", "messaging", "mcp", "block-kit"],
+      "category": "integrations"
     }
   ]
 }
